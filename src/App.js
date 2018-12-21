@@ -4,6 +4,7 @@ import './App.css';
 import NameCard from './components/NameCard';
 import LikesButton from './components/LikesButton';
 import DigitalClock from './components/DigitalClock';
+import CommentBox from './components/CommentBox';
 const tags = ['beautiful', 'wonderful']
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
       <NameCard name='King' number={1234567890} isHuman tags={tags}/>
       <LikesButton />
       <DigitalClock />
+      <CommentBox />
       </div>
     );
   }
