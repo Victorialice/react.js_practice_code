@@ -5,9 +5,23 @@ import NameCard from './components/NameCard';
 import LikesButton from './components/LikesButton';
 import DigitalClock from './components/DigitalClock';
 import CommentBox from './components/CommentBox';
+import CommentList from './components/CommentList';
 const tags = ['beautiful', 'wonderful']
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      comments: ['this is my first reply']
+    }
+    this.addComment = this.addComment.bind(this)
+  }
+  addComment(comment){
+    this.setState({
+      comments: [...this.state.comments, comment]
+    })
+  }
   render() {
+    const {comments} = this.state
     return (
       <div className="App">
       <header className="App-header">
@@ -16,7 +30,8 @@ class App extends Component {
       <NameCard name='King' number={1234567890} isHuman tags={tags}/>
       <LikesButton />
       <DigitalClock />
-      <CommentBox />
+      <CommentList comments={comments}/>
+      <CommentBox commentsLength={comments.length} onAddComment={this.addComment}/>
       </div>
     );
   }
