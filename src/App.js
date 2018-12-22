@@ -6,7 +6,21 @@ import LikesButton from './components/LikesButton';
 import DigitalClock from './components/DigitalClock';
 import CommentBox from './components/CommentBox';
 import CommentList from './components/CommentList';
+import ThemeContext from './theme-context';
+import ThemeBar from './components/ThemeBar';
 const tags = ['beautiful', 'wonderful']
+const themes = {
+  light: {
+    className: 'btn btn-primary',
+    bgColor: '#eeeeee',
+    color: '#000'
+  },
+  dark: {
+    className: 'btn btn-light',
+    bgColor: '#222222',
+    color: '#fff'
+  }
+}
 class App extends Component {
   constructor(props) {
     super(props)
@@ -23,16 +37,22 @@ class App extends Component {
   render() {
     const {comments} = this.state
     return (
-      <div className="App">
-      <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <NameCard name='King' number={1234567890} isHuman tags={tags}/>
-      <LikesButton />
-      <DigitalClock />
-      <CommentList comments={comments}/>
-      <CommentBox commentsLength={comments.length} onAddComment={this.addComment}/>
-      </div>
+      <ThemeContext.Provider value={themes.light}>
+        <div className="App">
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <h1 className="App-title">Welcome to React</h1>
+            <a href="#theme-switcher" className="btn btn-light">浅色主题</a>
+            <a href="#theme-switcher" className="btn btn-secondary">深色主题</a>
+          </header>
+          <ThemeBar/>
+          <NameCard name='King' number={1234567890} isHuman tags={tags}/>
+          <LikesButton />
+          <DigitalClock />
+          <CommentList comments={comments}/>
+          <CommentBox commentsLength={comments.length} onAddComment={this.addComment}/>
+        </div>
+      </ThemeContext.Provider>
     );
   }
 }
